@@ -9,6 +9,14 @@
 import Vue from 'vue';
 import HelloWorld from './components/HelloWorld.vue';
 
+export type Datatype ={
+	site_setting: Object
+	first_comment_bot_messages: Array<Object>
+	messageInput: string | null
+	isChange: boolean
+}
+
+
 type Profile =  {
   favoriteFood: string,
   hobby: string,
@@ -17,8 +25,14 @@ type Profile =  {
 
 type User = {
   name: string;
-  age: number;
+  age?: number;
   profile: Profile;
+}
+
+type Params = {
+  "pass_site_setting": {
+    "is_use_first_comment_bot": boolean
+  }
 }
 
 export default Vue.extend({
@@ -29,7 +43,7 @@ export default Vue.extend({
   data(): User {
     return {
       name: "ryotaro",
-      age: 26,
+      // age: 26,
       profile:{
         favoriteFood: "いちご",
         hobby: "バドミントン",
@@ -46,8 +60,12 @@ export default Vue.extend({
     },
   },
   methods: {
-    async reqest() {
-      return 1;
+    async reqestProfile(profile: Profile): Promise<Profile | void> {
+      return {
+        favoriteFood: "いちご",
+        hobby: "バドミントン",
+        specialSkills: "プログラミング",
+      };
     },
   },
 });
